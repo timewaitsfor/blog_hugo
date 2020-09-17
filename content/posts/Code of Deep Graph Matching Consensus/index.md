@@ -137,3 +137,5 @@ def update(self, inputs: Tensor) -> Tensor:
 ## stepin DGMC(.)
 DGMC --> RelCNN(.) --> RelConv(MessagePassing)  
 先调用了第一层`h_s = self.psi_1(x_s, edge_index_s, edge_attr_s)`
+
+还没有完全看懂，先这样把！以后再看，而且，这里作者并没有使用sinkhorn normalization.

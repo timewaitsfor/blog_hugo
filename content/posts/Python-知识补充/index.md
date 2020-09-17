@@ -46,5 +46,24 @@ c = param_arrow_exp(max, 2)
 print(c)
 => 3
 ```
+## for x in y or z:
+If y evaluates to True, the for-loop will iterate through it,Otherwise, it will iterate through z.
 
-
+```python
+>>> y = [1, 2, 3]
+>>> z = [4, 5, 6]
+>>> for x in y or z:
+...     print x
+...
+1
+2
+3
+>>> y = [] # Empty lists evaluate to False in Python
+>>> for x in y or z:
+...     print x
+...
+4
+5
+6
+>>>
+```
