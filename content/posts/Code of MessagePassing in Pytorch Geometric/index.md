@@ -6,6 +6,7 @@ katex: true
 
 # abstract
 我打算从最简单的GCN入手，理解Pytorch Geometric包的MessagePassing类。  
+参考教程：[INTRODUCTION BY EXAMPLE](https://pytorch-geometric.readthedocs.io/en/latest/notes/introduction.html)
 Graph Convolution 操作通常被表示为 neighborhood aggregation 或者 message passing的scheme.  
 With <span>$\mathbf{x}^{(k-1)}_i \in \mathbb{R}^F$<span> denoting node  features  of node <span>$i$<span> in layer <span>$(k−1)$<span> and  
 
