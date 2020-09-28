@@ -43,3 +43,17 @@ def shift_lift00(n, p):
 
 # 第2题：
 > 在有序表(12,24,36,48,60,72,84)中二分查找关键字72时所需进行的关键字比较次数是多少？
+
+```python
+def binary_search(arr, tar, l_index, r_index):
+    mid_index = l_index + int((r_index - l_index)/2)
+    mid_value = arr[mid_index]
+
+    if tar < mid_value:
+        return binary_search(arr, tar, l_index, mid_index-1)
+    elif tar == mid_value:
+        return mid_index
+    else:
+        return binary_search(arr, tar, mid_index+1, r_index)
+```
+二分查找的代码
