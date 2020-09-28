@@ -67,3 +67,9 @@ If y evaluates to True, the for-loop will iterate through it,Otherwise, it will 
 6
 >>>
 ```
+
+## Python函数调用时参数传递方式
+
+参考：[python函数调用时参数传递方式](https://www.cnblogs.com/downey-blog/p/10483216.html)
+
+一言以蔽之，list，dict这种对象是参数传递是“传引用”，而对于int这些类型是传“值”
