@@ -31,3 +31,24 @@ git commit
 git pull --rebase
 git push origin master
 ```
+
+# 上传全新的git到GitHub的repository
+
+create a new repository on the command line
+```sh
+echo "# pro_lab" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:timewaitsfor/pro_lab.git
+git push -u origin main
+```
+# 将已有的代码的git到GitHub的repository
+
+push an existing repository from the command line
+```sh
+git remote add origin git@github.com:timewaitsfor/pro_lab.git
+git branch -M main
+git push -u origin main
+```
