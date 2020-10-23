@@ -107,7 +107,7 @@ tensor([[[16492, 12231,  2364,  ...,  8276, 12392,     0],
          [16527,  9158, 14656,  ..., 13908, 16987, 12498]]], device='cuda:0')
 ```
 将`S_idx`展开，同时每个元素重复256遍。  
-`torch.gather` （关于这个函数的使用参考：传送门）会返回一个和`idx` 的size一模一样的tensor，可以将387760个entity在h_t中的embedding取出来。这里模块的设计和我平常用的很不一样，我比较习惯于用torch.index_select，不知道这两者效率差异有多少。
+`torch.gather` （关于这个函数的使用参考：[传送门](https://zhuanlan.zhihu.com/p/101896024)）会返回一个和`idx` 的size一模一样的tensor，可以将387760个entity在h_t中的embedding取出来。这里模块的设计和我平常用的很不一样，我比较习惯于用torch.index_select，不知道这两者效率差异有多少。
 
 然后就可以计算新的**correspondences matrix**：
 ```python
@@ -141,4 +141,34 @@ S_sparse_L.__val__ = S_L
 ```
 以上属于**local feature matching**的部分，可以得到一个还不错的**correspondences matrix**来确定哪些元素之间是对齐的。实验结果为0.68左右。
 
-这篇论文的第二个部分在于，**Refine correspondence matrix**. 由于第一部分是对邻域特征进行aggregate，而这种聚合主要是对邻居特征进行聚合，没有考虑纯粹的网络结构特征。用作者的话说就是
+这篇论文的第二个部分在于，**Refine correspondence matrix**. 由于第一部分是对邻域特征进行aggregate，而这种聚合主要是对邻居特征进行聚合，没有考虑纯粹的网络结构特征。用作者的话说就是 "Due to the purely local nature of the used node embeddings, our feature matching procedure is prone to finding false correspondences which are locally similar to the correct one. Formally, those cases pose a violation of the neighborhood consensus criteria employed in Equation " 
+
+$$
+\mathop{argmax}\limits_{\textbf{S}}\sum_{i,i^{\prime}\in V_s; j,j^{\prime}\in V_t} A_{i,i′}^{(s)} A_{j,j′}^{(t)} S_{i,j}S_{i′,j′}
+$$
+
+所以有了以下的代码：
+```python
+for _ in range(self.num_steps):
+    S = S_hat.softmax(dim=-1)
+    r_s = torch.randn((B, N_s, R_in), dtype=h_s.dtype,
+                        device=h_s.device)
+
+    tmp_t = r_s.view(B, N_s, 1, R_in) * S.view(B, N_s, k, 1)
+    tmp_t = tmp_t.view(B, N_s * k, R_in)
+    idx = S_idx.view(B, N_s * k, 1)
+    r_t = scatter_add(tmp_t, idx, dim=1, dim_size=N_t)
+
+    r_s, r_t = to_sparse(r_s, s_mask), to_sparse(r_t, t_mask)
+    o_s = self.psi_2(r_s, edge_index_s, edge_attr_s)
+    o_t = self.psi_2(r_t, edge_index_t, edge_attr_t)
+    o_s, o_t = to_dense(o_s, s_mask), to_dense(o_t, t_mask)
+
+    o_s = o_s.view(B, N_s, 1, R_out).expand(-1, -1, k, -1)
+    idx = S_idx.view(B, N_s * k, 1).expand(-1, -1, R_out)
+    tmp_t = torch.gather(o_t.view(B, N_t, R_out), -2, idx)
+    D = o_s - tmp_t.view(B, N_s, k, R_out)
+    S_hat = S_hat + self.mlp(D).squeeze(-1)
+```
+`num_steps`就是论文中的`L`大小，代码中为10，且只在100次常规epoch之后进行了一批为10次的Refine，之后再进行100次常规epoch已达到实验结果。
+这里的初始化`r_s`没有用之前GNN中的entity的特征而使用了随机初始化，
