@@ -1,8 +1,8 @@
 ---
-title: "Code of Deep Graph Matching Consensus"
+title: "Deep Graph Matching Consensus"
 date: 2020-09-14T11:11:41+08:00
-katex: true
 tags : ["doubt"]
+draft: true
 ---
 
 # abstract

@@ -1,7 +1,8 @@
 ---
-title: "Code of GAT"
+title: "代码解析：GAT"
 date: 2020-09-25T10:05:31+08:00
 katex: true
+categories: [代码解析]
 ---
 
 # class GATConv(MessagePassing):

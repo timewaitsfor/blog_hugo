@@ -1,7 +1,6 @@
 ---
 title: "多SSH设置"
 date: 2020-09-24T16:58:39+08:00
-draft: true
 ---
 
 # abstract

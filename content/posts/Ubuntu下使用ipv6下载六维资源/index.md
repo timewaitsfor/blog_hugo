@@ -1,7 +1,6 @@
 ---
 title: "Ubuntu下使用ipv6下载六维资源"
 date: 2020-09-14T10:17:32+08:00
-draft: true
 ---
 
 # Abstract

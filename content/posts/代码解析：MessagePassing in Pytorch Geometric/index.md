@@ -1,7 +1,8 @@
 ---
-title: "Code of MessagePassing in Pytorch Geometric"
+title: "代码解析：MessagePassing in Pytorch Geometric"
 date: 2020-09-15T19:29:25+08:00
 katex: true
+categories: [代码解析]
 ---
 
 # abstract
