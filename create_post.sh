@@ -1,1 +1,4 @@
-hugo new "posts/"$1"/index.md"
+ps_name = $*
+while 
+
+hugo new "posts/"ps_name"/index.md"
