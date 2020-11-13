@@ -1,6 +1,7 @@
 ---
-title: "Ubuntu使用手册"
+title: 使用手册：Ubuntu
 date: 2020-09-15T10:59:49+08:00
+categories: [使用手册]
 ---
 
 # abstract

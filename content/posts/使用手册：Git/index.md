@@ -1,6 +1,7 @@
 ---
-title: "Git使用手册"
+title: 使用手册：Git
 date: 2020-09-15T11:23:04+08:00
+categories: [使用手册]
 ---
 
 # abstract
