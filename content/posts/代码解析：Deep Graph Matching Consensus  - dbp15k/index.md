@@ -87,7 +87,7 @@ tmp_s = h_s.view(B, N_s, 1, C_out)
 idx = S_idx.view(B, N_s * k, 1).expand(-1, -1, C_out)
 tmp_t = torch.gather(h_t.view(B, N_t, C_out), -2, idx)
 ```
-`idx`就是将`S_idx`展开，维度为（1 x 387760 x 256）
+`idx` 就是将 `S_idx` 展开，维度为（1 x 387760 x 256）
 可以看一眼，`idx` 如下：（387760 = 19388 x 20）
 ```python
 tensor([[[16492, 16492, 16492,  ..., 16492, 16492, 16492],
@@ -172,8 +172,8 @@ for _ in range(self.num_steps):
     D = o_s - tmp_t.view(B, N_s, k, R_out)
     S_hat = S_hat + self.mlp(D).squeeze(-1)
 ```
-`num_steps`就是论文中的`L`大小，代码中为10，且只在100次常规epoch之后进行了一批为10次的Refine，之后再进行100次常规epoch已达到实验结果。
-这里的初始化`r_s`没有用之前GNN中的entity的特征而使用了随机初始化，每次Refine的时候都重新初始化`r_s`以保证GNN是与特征无关的邻域聚合。
+`num_steps` 就是论文中的 `L` 大小，代码中为10，且只在100次常规epoch之后进行了一批为10次的Refine，之后再进行100次常规epoch已达到实验结果。
+这里的初始化 `r_s` 没有用之前GNN中的entity的特征而使用了随机初始化，每次Refine的时候都重新初始化 `r_s` 以保证GNN是与特征无关的邻域聚合。
 
 用一个`toy_model`来测试一下：  
 如果`S_hat`是一个`([1,  20,  10])`的tensor，于是`S`也是同维tensor.
