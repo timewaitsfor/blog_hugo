@@ -1,7 +1,7 @@
 ---
-title: Python 知识补充
+title: 使用手册：Python
 date: 2020-09-11 08:50:16
-tags:
+categories: [使用手册]
 ---
 
 # abstract
