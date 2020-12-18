@@ -2,9 +2,14 @@
 title: "使用手册：阿里云平台使用指南"
 date: 2020-12-15T09:23:15+08:00
 draft: true
+categories: [使用手册]
 ---
 
 # 阿里云平台的使用
+
+    IP: 39.101.128.205
+
+ssh root@39.101.128.205
 
 `vcctl job list`
 查看当任务
@@ -15,11 +20,14 @@ draft: true
 `vcctl job create -f yjz-ea-1.yaml`
 新建任务
 
+`kubectl get pods -o wide | grep ea`
+查看进程详情
+
 `kubectl logs ea-exp-task-0-0`
 查看log
 
-`kubectl get pods -o wide | grep ea`
-查看进程详情
+`kubectl exec ea-exp-task-0-0 -it -- bash`
+可以查看显存使用情况，直接进到docker里
 
 `kubectl describe pod ea-exp-task-0-0`
 查看pod的信息
