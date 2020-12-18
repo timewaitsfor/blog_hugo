@@ -7,9 +7,16 @@ categories: [使用手册]
 
 # 阿里云平台的使用
 
+## 阿里云服务器
     IP: 39.101.128.205
+    ssh: root@39.101.128.205
+    pwd: I
 
-ssh root@39.101.128.205
+## 172服务器
+    IP: 10.10.110.72
+    ssh: root@10.10.110.72
+    pwd: WO_aIiIe!
+
 
 `vcctl job list`
 查看当任务
