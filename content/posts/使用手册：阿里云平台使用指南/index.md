@@ -87,6 +87,31 @@ pip install torch-geometric
 
 5. 小数据集上跑的，大的数据集很慢
 
+# 模型融合
+
+## SOTA: BERT-INT
+
+### Run BERT-based Interaction Model
+#### clean_attribute_data.py
+output：  
+1. new_att_triples_1
+2. new_att_triples_2
+3. remove_att_triples_1
+4. remove_att_triples_2
+
+#### get_entity_embedding.py
+output:
+1. DBP15K_zhen_emb_4.pkl  
+这个是entity的em
+2. train_candidates.pkl
+3. test_candidates.pkl  
+2.3是训练集和测试集中，从zh到en候选集中挑选最相似的候选集，有点像Hit，这里是Hit50
+4. ent_pairs.pkl  
+这个也不太清楚，为什么要把50候选集的pairs都取出来，然后还要加上ILL的对齐pairs
+
+#### get_attributeValue_embedding.py
+
+
 
 # 服务器信息
 141.164.45.210
