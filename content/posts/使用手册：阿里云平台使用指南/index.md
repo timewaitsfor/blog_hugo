@@ -122,3 +122,7 @@ F?4yjP?UPRzVH8Ns
 
 # 其他信息
 验证了一下，发现用那个跨网络的embedding，相似度很低
+
+# 测试10.0
+
+docker pull pytorch/pytorch:1.2-cuda10.0-cudnn7-devel
